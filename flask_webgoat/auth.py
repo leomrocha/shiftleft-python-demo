@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, session, redirect
 from . import query_db
+import sqlite3
 
 bp = Blueprint("auth", __name__)
 
@@ -23,7 +24,6 @@ def login():
     return jsonify({"success": True})
 
 
-
 @bp.route("/login_and_redirect")
 def login_and_redirect():
     username = request.args.get("username")
@@ -44,4 +44,6 @@ def login_and_redirect():
         return redirect(url)
     session["user_info"] = (result[0], result[1], result[2])
     return jsonify({"success": True})
+
+
 
